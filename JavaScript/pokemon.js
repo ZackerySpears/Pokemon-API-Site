@@ -8,11 +8,30 @@ $(function(){
         //Getting the input from the search bar
         let pokemonNameOrID = $("#pokemonInput").val().toLowerCase();
 
+        //clear tge input from the value search bar
+        $("#pokemonInput").val("");
         //Remove old info from the pokemon information list
         $("#pokemonInformationList").html("");
 
         getPokemonInfo(pokemonNameOrID);
     }); 
+
+    $("#pokemonInput").keydown(function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault(); //Stops the key from doing it's default behavior
+
+            let pokemonNameOrID = $("#pokemonInput").val().toLowerCase();
+
+            //clear tge input from the value search bar
+            $("#pokemonInput").val("");
+            //Remove old info from the pokemon information list
+            $("#pokemonInformationList").html("");
+    
+            getPokemonInfo(pokemonNameOrID);
+        }
+       
+    });
+    
 
     function determineBackgroundColor(type){
         switch (type) {
@@ -56,6 +75,7 @@ $(function(){
                 return "#000";
         }
     }
+    
 
     //Function to retrieve information about a Pokemon from the API
     function getPokemonInfo(nameOrID) {
